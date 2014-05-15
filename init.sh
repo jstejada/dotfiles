@@ -12,5 +12,5 @@ for vimfile in "$dotfiles_directory"/vim/^colors(.N); do
   ln -sfv "$vimfile" "${ZDOTDIR:-$HOME}/.${vimfile:t}"
 done
 
-rm -rfv ${ZDOTDIR:-$HOME}/.vim/colors
+rm -rf ${ZDOTDIR:-$HOME}/.vim/colors
 cp -rfv vim/colors ~/.vim
