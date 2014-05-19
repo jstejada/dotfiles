@@ -7,6 +7,14 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+"
+" see :h vundle for more details or wiki for FAQ
+
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
@@ -36,6 +44,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
+Plugin 'Lokaltog/vim-easymotion'
 
 " Colors
 Plugin 'altercation/vim-colors-solarized'
@@ -55,14 +64,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
+
 " Put your non-Plugin stuff after this line
 
 "" Basics
@@ -192,8 +194,12 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+" Leader-v to edit vimrc
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
 " Leader Leader to switch between last 2 buffers
 nnoremap <leader><leader> <c-^>
+map <leader><Tab> :bn<CR>
 
 "" set scss files RIGHT
 au BufRead,BufNewFile *.scss set filetype=scss

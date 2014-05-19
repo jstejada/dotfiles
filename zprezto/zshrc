@@ -15,3 +15,12 @@ export EDITOR=vim
 export VISUAL=vim
 
 alias ssh="TERM=screen ssh"
+alias vimrc="vim ~/.vimrc"
+alias zshrc="vim ~/.zshrc"
+
+# Git
+alias gst="gwS"
+alias ga="gia"
+
+# rbenv
+eval "$(rbenv init - zsh)"
