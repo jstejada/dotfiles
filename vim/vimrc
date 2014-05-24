@@ -46,6 +46,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'majutsushi/tagbar'
 
 " Colors
 Plugin 'altercation/vim-colors-solarized'
@@ -156,6 +157,8 @@ set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 "" map escape key to jk -- much faster
 " also, <C-c> and <C-[>
 imap jk <esc>
+imap jj <esc>
+imap kk <esc>
 
 "" window navigation
 nmap <C-h> <C-w>h
@@ -213,8 +216,19 @@ nnoremap <leader><leader> <c-^>
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 
-"" set scss files RIGHT
+" set scss files RIGHT
 au BufRead,BufNewFile *.scss set filetype=scss
+
+" ctags
+function! FlushCtags()
+  silent! exe ":!ctags -R"
+endfunction
+" mapping to generate tags file
+silent! nnoremap <silent> TT :call FlushCtags()<CR>
+" mapping to user ctrp tags function
+nnoremap <leader>. :CtrlPTag<cr>
+" mapping to toggle tagbar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 "" PLUGINS -------------------------------------------------------------------
 " Airline, a powerline replacement
