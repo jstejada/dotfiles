@@ -45,13 +45,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
 
 " Colors
 Plugin 'altercation/vim-colors-solarized'
 
 " Syntax
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'nono/vim-handlebars'
+Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'groenewege/vim-less'
 Plugin 'beyondwords/vim-twig'
 Plugin 'jelera/vim-javascript-syntax'
@@ -65,7 +66,7 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-" Put your non-Plugin stuff after this line
+" Non-Plugin stuff after this line
 
 "" Basics
 set number
@@ -132,6 +133,7 @@ set wildignore+=*.o,*.out,*.obj,.git,*.rbc,*.rbo,*.class,.svn,*.gem
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
 set wildignore+=*.swp,*~,._*
+set wildignore+=*/node_modules/*,*/bower_components/*
 
 "" set <leader> to ,
 let mapleader = ","
@@ -172,7 +174,16 @@ set clipboard=unnamed
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 "" kill all trailing whitespace
-nnoremap <leader>rtw :%s/\s\+$//e<CR>
+function! <SID>RemoveWhitespaces()
+  let l = line(".")
+  let c = col(".")
+  execute '%s/\s\+$//e'
+  call cursor(l, c)
+endfunction
+nnoremap <silent> <leader><Space> :call <SID>RemoveWhitespaces()<CR>
+
+" Remove white spaces on write
+autocmd BufWritePre * :call <SID>RemoveWhitespaces()
 
 "" up/down keys move by row, rather than line
 nnoremap j gj
@@ -195,11 +206,12 @@ if has("autocmd")
 endif
 
 " Leader-v to edit vimrc
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nmap <leader>v :e $MYVIMRC<CR>
 
-" Leader Leader to switch between last 2 buffers
+" Buffer switching
 nnoremap <leader><leader> <c-^>
-map <leader><Tab> :bn<CR>
+nnoremap <Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
 
 "" set scss files RIGHT
 au BufRead,BufNewFile *.scss set filetype=scss
@@ -242,6 +254,10 @@ let g:EasyMotion_leader_key = '<Space>'
 "" Command-T
 " nnoremap <silent> <Leader>t :CommandT<CR>
 " nnoremap <silent> <Leader>b :CommandTBuffer<CR>
+
+"" Ctrlp
+let g:ctrlp_show_hidden = 1
+
 
 "" Colors and type------------------------------------------------------------
 set guifont=Inconsolata\ for\ Powerline:h14
