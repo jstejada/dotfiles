@@ -221,7 +221,7 @@ au BufRead,BufNewFile *.scss set filetype=scss
 
 " ctags
 function! FlushCtags()
-  silent! exe ":!ctags -R"
+  silent! exe ":!ctags ."
 endfunction
 " mapping to generate tags file
 silent! nnoremap <silent> TT :call FlushCtags()<CR>
@@ -229,6 +229,18 @@ silent! nnoremap <silent> TT :call FlushCtags()<CR>
 nnoremap <leader>. :CtrlPTag<cr>
 " mapping to toggle tagbar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
+" tagbar coffeescript options
+let g:tagbar_type_coffee = {
+    \ 'ctagstype' : 'coffee',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 'm:methods',
+        \ 'f:functions',
+        \ 'v:variables',
+        \ 'f:fields',
+    \ ]
+\ }
+
 
 "" PLUGINS -------------------------------------------------------------------
 " Airline, a powerline replacement

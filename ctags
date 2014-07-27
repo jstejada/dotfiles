@@ -22,5 +22,6 @@
 --recurse=yes
 --tag-relative=yes
 --exclude=.git
--L .srclist
+--exclude=node_modules
+--exclude=bower_components
 -f ./.git/tags
