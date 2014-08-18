@@ -47,8 +47,14 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'majutsushi/tagbar'
+
+" Python
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'alfredodeza/pytest.vim'
+
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " Colors
 Plugin 'altercation/vim-colors-solarized'
