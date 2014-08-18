@@ -229,27 +229,25 @@ nnoremap <S-Tab> :bp<CR>
 " set scss files RIGHT
 au BufRead,BufNewFile *.scss set filetype=scss
 
-" ctags
+
+" CTAGS  -------------------------------------------------------------------
+
+" Set tag file location
+set tags+=.git/tags
+
+" Function to regenerate tag file
 function! FlushCtags()
   silent! exe ":!ctags ."
 endfunction
-" mapping to generate tags file
-silent! nnoremap <silent> TT :call FlushCtags()<CR>
-" mapping to user ctrp tags function
-nnoremap <leader>. :CtrlPTag<cr>
+
+" mapping to regenerate tags file
+" silent! nnoremap <silent> TT :call FlushCtags()<CR>
+
 " mapping to toggle tagbar
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
-" tagbar coffeescript options
-let g:tagbar_type_coffee = {
-    \ 'ctagstype' : 'coffee',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 'm:methods',
-        \ 'f:functions',
-        \ 'v:variables',
-        \ 'f:fields',
-    \ ]
-\ }
+nnoremap <leader>. :TagbarToggle<cr>
+
+" mapping to use ctrlp tags function
+nnoremap <silent> <Leader>b :CtrlPTag<CR>
 
 
 "" PLUGINS -------------------------------------------------------------------
