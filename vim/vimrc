@@ -291,6 +291,31 @@ let g:EasyMotion_leader_key = '<Space>'
 
 "" Ctrlp
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_extensions = ['tag']
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+
+"" Tagbar
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
+
+"" Options to add support for Coffeescript
+let g:tagbar_type_coffee = {
+    \ 'ctagstype' : 'coffee',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 'm:methods',
+        \ 'f:functions',
+        \ 'v:variables',
+        \ 'f:fields',
+    \ ]
+\ }
+
+
+"" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
 "" Colors and type------------------------------------------------------------
