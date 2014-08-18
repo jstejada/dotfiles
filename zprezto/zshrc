@@ -24,3 +24,8 @@ alias ga="gia"
 
 # rbenv
 eval "$(rbenv init - zsh)"
+
+# virtualenvwrapper
+export WORKON_HOME=~/venvs
+source /usr/local/bin/virtualenvwrapper.sh
+unset VIRTUAL_ENV_DISABLE_PROMPT
