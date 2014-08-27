@@ -181,6 +181,9 @@ nnoremap <C-l> <C-w>l
 set splitbelow
 set splitright
 
+" Visually select the text that was last edited/pasted
+nmap gV `[v`]
+
 "" highlight brackets
 hi MatchParen cterm=bold ctermbg=darkmagenta ctermfg=white
 
