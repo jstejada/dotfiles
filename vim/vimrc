@@ -172,10 +172,14 @@ imap jj <esc>
 imap kk <esc>
 
 "" window navigation
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Open new split panes to right and bottom. More natural than default:
+set splitbelow
+set splitright
 
 "" highlight brackets
 hi MatchParen cterm=bold ctermbg=darkmagenta ctermfg=white
@@ -207,12 +211,12 @@ nnoremap k gk
 set hidden
 
 "" bubble single lines
-nmap <C-k> [e
-nmap <C-j> ]e
+nmap <C-Up> [e
+nmap <C-Down> ]e
 
 "" bubble multiple lines
-vmap <C-k> [egv
-vmap <C-j> ]egv
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 "" Reload .vimrc after editing and saving
 if has("autocmd")
