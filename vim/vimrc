@@ -201,7 +201,10 @@ endfunction
 nnoremap <silent> <leader><Space> :call <SID>RemoveWhitespaces()<CR>
 
 " Remove white spaces on write
-autocmd BufWritePre * :call <SID>RemoveWhitespaces()
+augroup AutoRemoveWhitespace
+  autocmd!
+  autocmd BufWritePre * :call <SID>RemoveWhitespaces()
+augroup END
 
 "" up/down keys move by row, rather than line
 nnoremap j gj
@@ -219,9 +222,10 @@ vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
 "" Reload .vimrc after editing and saving
-if has("autocmd")
+augroup AutoSourceVimrc
+  autocmd!
   autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+augroup END
 
 " Leader-v to edit vimrc
 nmap <leader>v :e $MYVIMRC<CR>
