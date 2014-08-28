@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 setopt EXTENDED_GLOB
 dotfiles_directory=${1:-${ZDOTDIR:-$HOME}/dotfiles}
-config_files="ctags"
+config_files=("ctags" "tmux.conf")
 
 for preztofile in "$dotfiles_directory"/zprezto/^README.md(.N); do
   rm -rfv ".${preztofile:t}"
