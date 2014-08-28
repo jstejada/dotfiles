@@ -50,7 +50,6 @@ Plugin 'majutsushi/tagbar'
 
 " Python
 Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'alfredodeza/pytest.vim'
 
 " Snippets
 Plugin 'SirVer/ultisnips'
