@@ -265,6 +265,7 @@ nnoremap <silent> <Leader>b :CtrlPTag<CR>
 
 
 "" PLUGINS -------------------------------------------------------------------
+
 " Airline, a powerline replacement
 let g:airline_powerline_fonts = 1
 " let g:airline_section_b = '%{getcwd()}'
@@ -284,9 +285,6 @@ let g:blockify_pairs = {
       \ 'javascript': [ '{', '}' ],
       \ 'php.drupal': [ '{', '}' ],
       \}
-
-"" JS enhanced syntax
-au FileType javascript call JavaScriptFold()
 
 
 "" Numbers
