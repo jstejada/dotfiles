@@ -21,7 +21,6 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 
 " Plugins
-Plugin 'benmills/vimux'
 Plugin 'bling/vim-airline'
 Plugin 'bling/vim-bufferline'
 Plugin 'henrik/vim-reveal-in-finder'
@@ -49,6 +48,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'majutsushi/tagbar'
 
 " Tmux
+Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Python
