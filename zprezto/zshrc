@@ -14,7 +14,7 @@ fi
 export EDITOR=vim
 export VISUAL=vim
 
-alias ssh="TERM=screen ssh"
+alias ssh="TERM=xterm ssh"
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
 
