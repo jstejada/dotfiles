@@ -48,6 +48,9 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'majutsushi/tagbar'
 
+" Tmux
+Plugin 'christoomey/vim-tmux-navigator'
+
 " Python
 Plugin 'jmcantrell/vim-virtualenv'
 
@@ -336,7 +339,4 @@ colorscheme bubblegum
 if has('gui_running')
   set go-=T
 endif
-
-"" Vimux
-map <Leader>js :call VimuxRunCommand("clear; node " . bufname("%"))<CR>
 
