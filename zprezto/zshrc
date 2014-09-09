@@ -19,8 +19,9 @@ alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
 
 # Git
-alias gst="gwS"
+alias gst="clear;gwS"
 alias ga="gia"
+alias gtday="g log --since=\"12am\" | ack Date: | wc -l"
 
 # rbenv
 eval "$(rbenv init - zsh)"
