@@ -50,6 +50,7 @@ Plugin 'majutsushi/tagbar'
 " Tmux
 Plugin 'benmills/vimux'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'edkolev/tmuxline.vim'
 
 " Python
 Plugin 'jmcantrell/vim-virtualenv'
@@ -194,7 +195,7 @@ set clipboard=unnamed
 
 "" preserve indentation while pasting text from the OS X clipboard
 "" use ,p dummy
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+noremap <Leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
 "" kill all trailing whitespace
 function! <SID>RemoveWhitespaces()
@@ -203,7 +204,7 @@ function! <SID>RemoveWhitespaces()
   execute '%s/\s\+$//e'
   call cursor(l, c)
 endfunction
-nnoremap <silent> <leader><Space> :call <SID>RemoveWhitespaces()<CR>
+nnoremap <silent> <Leader><Space> :call <SID>RemoveWhitespaces()<CR>
 
 " Remove white spaces on write
 augroup AutoRemoveWhitespace
@@ -233,12 +234,15 @@ augroup AutoSourceVimrc
 augroup END
 
 " Leader-v to edit vimrc
-nmap <leader>v :e $MYVIMRC<CR>
+nmap <Leader>v :e $MYVIMRC<CR>
 
 " Buffer switching
-nnoremap <leader><leader> <c-^>
+nnoremap <Leader><Leader> <c-^>
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
+
+" Buffer closing (without deleting split)
+nnoremap <silent> <Leader>d :bp\|bd #<CR>
 
 " set scss files RIGHT
 au BufRead,BufNewFile *.scss set filetype=scss
@@ -258,7 +262,7 @@ endfunction
 " silent! nnoremap <silent> TT :call FlushCtags()<CR>
 
 " mapping to toggle tagbar
-nnoremap <leader>. :TagbarToggle<cr>
+nnoremap <Leader>. :TagbarToggle<cr>
 
 " mapping to use ctrlp tags function
 nnoremap <silent> <Leader>b :CtrlPTag<CR>
@@ -330,6 +334,28 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+
+"" Vimux
+" Run the current file with rspec
+map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+
+" Close vim tmux runner opened by VimuxRunCommand
+map <Leader>vq :VimuxCloseRunner<CR>
+
+" Interrupt any command running in the runner pane
+map <Leader>vx :VimuxInterruptRunner<CR>
+
+" Zoom the runner pane (use <bind-key> z to restore runner pane)
+map <Leader>vz :call VimuxZoomRunner()<CR>
 
 "" Colors and type------------------------------------------------------------
 set guifont=Inconsolata\ for\ Powerline:h14
