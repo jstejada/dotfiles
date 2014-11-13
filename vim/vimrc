@@ -46,6 +46,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'majutsushi/tagbar'
+Plugin 'godlygeek/tabular'
 
 " Tmux
 Plugin 'benmills/vimux'
