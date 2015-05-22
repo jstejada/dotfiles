@@ -27,7 +27,6 @@ Plugin 'henrik/vim-reveal-in-finder'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'matze/vim-move'
-Plugin 'mhinz/vim-blockify'
 Plugin 'mhinz/vim-signify'
 Plugin 'mhinz/vim-startify'
 Plugin 'mileszs/ack.vim'
@@ -73,6 +72,7 @@ Plugin 'tpope/vim-haml'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'tpope/vim-liquid'
 Plugin 'rodjek/vim-puppet'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -147,7 +147,7 @@ set wildignore+=*.o,*.out,*.obj,*.rbc,*.rbo,*.class,*.gem,*.pyc
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
 set wildignore+=*.swp,*~,._*
-set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*
+set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*,*/img/*,*/images/*
 set wildignore+=*/env/*,*/venv/*,*/devenv/*,*/__pycache__/*,*/.divshot-cache/*
 set wildignore+=.DS_Store
 
@@ -327,6 +327,35 @@ let g:tagbar_type_coffee = {
         \ 'v:variables',
         \ 'f:fields',
     \ ]
+\ }
+
+"" Options to add support for Go
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
 \ }
 
 

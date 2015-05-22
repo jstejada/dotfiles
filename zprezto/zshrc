@@ -30,3 +30,7 @@ eval "$(rbenv init - zsh)"
 export WORKON_HOME=~/venvs
 source /usr/local/bin/virtualenvwrapper.sh
 unset VIRTUAL_ENV_DISABLE_PROMPT
+
+# go
+export GOPATH=$HOME/codez/go
+export PATH="$GOPATH/bin:$PATH"
