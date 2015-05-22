@@ -19,9 +19,24 @@ alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
 
 # Git
-alias gst="clear;gwS"
-alias ga="gia"
+alias gst="clear;gws"
 alias gtday="g log --since=\"12am\" | ack Date: | wc -l"
+# alias ga="gia"
+function ga {
+  opt=""
+  getopts ":p" opt
+  if [[ $opt == "p" ]] ; then
+    pattern=$2
+    opts=("-p" "-A")
+  else
+    pattern=$1
+    opts=("-A")
+  fi
+  files=($(git ls-files -om --exclude-standard | xargs -I {} zsh -c '[[ "{}" =~ "\.*'$pattern'\.*" ]] && echo "{}"'))
+  if [ ${#files[@]} -ne 0  ]; then
+    git add "${opts[@]}" "${files[@]}"
+  fi
+}
 
 # rbenv
 eval "$(rbenv init - zsh)"
