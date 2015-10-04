@@ -152,12 +152,13 @@ set undodir=~/.vim/backups
 set undofile
 
 "" wildcard settings
-set wildignore+=*.o,*.out,*.obj,*.rbc,*.rbo,*.class,*.gem,*.pyc
+set wildignore+=*.o,*.out,*.obj,*.rbc,*.rbo,*.class,*.gem,*.pyc,*.log
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
 set wildignore+=*.swp,*~,._*
 set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*,*/img/*,*/images/*
 set wildignore+=*/env/*,*/venv/*,*/devenv/*,*/__pycache__/*,*/.divshot-cache/*
+set wildignore+=.awspublish*
 set wildignore+=.DS_Store
 
 "" set <leader> to ,
