@@ -19,6 +19,7 @@ alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
 
 # Git
+eval "$(hub alias -s)"
 alias gst="clear;gws"
 alias gtday="g log --since=\"12am\" | ack Date: | wc -l"
 # alias ga="gia"
