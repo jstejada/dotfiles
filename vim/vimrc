@@ -404,8 +404,16 @@ map <Leader>vz :call VimuxZoomRunner()<CR>
 
 "" Colors and type------------------------------------------------------------
 set guifont=Inconsolata\ for\ Powerline:h14
-colorscheme bubblegum
+let g:hybrid_use_Xresources = 1
+set background=dark
+colorscheme hybrid
 if has('gui_running')
   set go-=T
 endif
 
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
