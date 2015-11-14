@@ -82,6 +82,7 @@ Plugin 'tpope/vim-liquid'
 Plugin 'rodjek/vim-puppet'
 Plugin 'fatih/vim-go'
 Plugin 'mxw/vim-jsx'
+Plugin 'mtscout6/vim-cjsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
