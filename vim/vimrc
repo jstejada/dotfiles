@@ -97,6 +97,7 @@ set number
 syntax on
 set encoding=utf-8
 set mouse=a
+set ttymouse=xterm
 
 "" Things like whitespace
 set nowrap
