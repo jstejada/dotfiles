@@ -82,6 +82,7 @@ Plugin 'tpope/vim-liquid'
 Plugin 'rodjek/vim-puppet'
 Plugin 'fatih/vim-go'
 Plugin 'mxw/vim-jsx'
+Plugin 'mtscout6/vim-cjsx'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -255,8 +256,9 @@ nnoremap <S-Tab> :bp<CR>
 " Buffer closing (without deleting split)
 nnoremap <silent> <Leader>d :bp\|bd #<CR>
 
-" set scss files RIGHT
+" Filetypes
 au BufRead,BufNewFile *.scss set filetype=scss
+autocmd BufNewFile,BufRead *Spec.{js,jsx,es6},*_spec.{js,jsx,es6},*-spec.{js,jsx,es6},*.spec.{js,jsx,es6} set filetype=jasmine.javascript.jsx
 
 
 " CTAGS  -------------------------------------------------------------------
@@ -285,6 +287,7 @@ nnoremap <silent> <Leader>b :CtrlPTag<CR>
 let g:airline_powerline_fonts = 1
 " let g:airline_section_b = '%{getcwd()}'
 " let g:airline_section_c = '%t'
+let g:airline_section_x = '%y'
 let g:airline#extensions#tabline#enabled = 1
 
 
