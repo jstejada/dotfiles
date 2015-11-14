@@ -256,8 +256,9 @@ nnoremap <S-Tab> :bp<CR>
 " Buffer closing (without deleting split)
 nnoremap <silent> <Leader>d :bp\|bd #<CR>
 
-" set scss files RIGHT
+" Filetypes
 au BufRead,BufNewFile *.scss set filetype=scss
+autocmd BufNewFile,BufRead *Spec.{js,jsx,es6},*_spec.{js,jsx,es6},*-spec.{js,jsx,es6},*.spec.{js,jsx,es6} set filetype=jasmine.javascript.jsx
 
 
 " CTAGS  -------------------------------------------------------------------
