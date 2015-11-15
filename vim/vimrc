@@ -316,6 +316,7 @@ let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_javascript_checkers = ['eslint', 'jshint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 "" EasyMotion
@@ -417,3 +418,7 @@ if &term =~ '256color'
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
 endif
+
+" Project specific vimrc
+set exrc
+set secure
