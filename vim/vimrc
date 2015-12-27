@@ -1,59 +1,134 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" juan's vimrc
+" Highly inspired from @e0m and jalopezsilva -- many thanks!
+" @juanstejada
+" -------------------------------
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" == Initialize Plugins == {{{
 
 " Brief help
 " :PluginList          - list configured plugins
 " :PluginInstall(!)    - install (update) plugins
 " :PluginSearch(!) foo - search (or refresh cache first) for foo
 " :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
 
-" let Vundle manage Vundle, required
+set nocompatible                   " Does not use old vi quirks
+filetype off                       " Required temporarily for Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
 Plugin 'gmarik/Vundle.vim'
 
-" Keep Plugin commands between vundle#begin/end.
 
-" Plugins
+" General Purpose Plugins
+" =======================
+
+" A camel-case detecting motion
+Plugin 'bkad/CamelCaseMotion'
+
+" New text object for a function argument
+" http://www.vim.org/scripts/script.php?script_id=2699
+Plugin 'vim-scripts/argtextobj.vim'
+
+" Extends % operator to match html tags and others.
+Plugin 'tmhedberg/matchit'
+
+" Unload/delete/wipe a buffer, keep its window(s)
+Plugin 'qpkorr/vim-bufkill'
+
+" Fancy status bar at the botton
 Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
+
+" Show the current buffer in finder
 Plugin 'henrik/vim-reveal-in-finder'
+
+" Insert closing brackets/parens
 Plugin 'jiangmiao/auto-pairs'
+
+" Fuzzy file searcher
+" TODO switch for fzf
 Plugin 'kien/ctrlp.vim'
-Plugin 'matze/vim-move'
+
+" Easily search for, substitute, & abbreviate multiple variants of a word
+" https://github.com/tpope/vim-abolish
+" http://vimcasts.org/episodes/enhanced-abbreviations-with-abolish/
+Plugin 'tpope/vim-abolish'
+
+" Move lines and selections, preserving indentation
+Plugin 'jstejada/vim-move'
+
+" Show markers in file for lines changed according to git
 Plugin 'mhinz/vim-signify'
-Plugin 'mhinz/vim-startify'
+
+" Silver searcher inside vim
 Plugin 'rking/ag.vim'
-Plugin 'myusuf3/numbers.vim'
+
+" Allows me to add syntax plugins
 Plugin 'scrooloose/syntastic'
-Plugin 'sjl/vitality.vim'
+
+" Comment out code easily
 Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-eunuch'
+
+" Git commands inside vim
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
+
+" Repeat last command with '.'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sensible'
+
+" Surround any vim object with quotes, tags, parens or whatever
 Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-vinegar'
-Plugin 'Lokaltog/vim-easymotion'
+
+" Allows multiple cursors
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'majutsushi/tagbar'
+
+" Align code around a regex
 Plugin 'godlygeek/tabular'
 
-" Tmux
-Plugin 'benmills/vimux'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'edkolev/tmuxline.vim'
+" Easy text exchange operator for Vim
+" Mapped to cx
+" http://vimcasts.org/episodes/swapping-two-regions-of-text-with-exchange-vim/
+Plugin 'tommcdo/vim-exchange'
 
-" Python
-Plugin 'jmcantrell/vim-virtualenv'
+" Shows indent level
+Plugin 'nathanaelkane/vim-indent-guides'
+
+
+" Snippets
+" ========
+
+" Allows code snippet insertion
+Plugin 'SirVer/ultisnips'
+" Package with set of predefined snippets
+Plugin 'honza/vim-snippets'
+
+
+" Tmux Plugins
+" ============
+
+" Lets me run shell commands from vim running on tmux
+Plugin 'benmills/vimux'
+" Navigate between vim and tmux seamlessly
+Plugin 'christoomey/vim-tmux-navigator'
+" Plugin to have the same status bar for vim a tmux
+Plugin 'edkolev/tmuxline.vim'
+" Restores the FocusLost and FocusGained autocommand functionality.
+" Now Vim can save when iTerm 2 loses focus, even if it's inside tmux
+Plugin 'sjl/vitality.vim'
+
+
+" Syntax Plugins
+" ==============
+
+" Javascript / JSX
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
+" Coffeescript / CJSX
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mtscout6/vim-cjsx'
+
+" Go
+Plugin 'fatih/vim-go'
 
 " Clojure
 Plugin 'guns/vim-sexp'
@@ -63,254 +138,422 @@ Plugin 'guns/vim-clojure-highlight'
 Plugin 'tpope/vim-fireplace'
 Plugin 'kien/rainbow_parentheses.vim'
 
-" Snippets
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-
-" Colors
-Plugin 'altercation/vim-colors-solarized'
-
-" Syntax
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'mustache/vim-mustache-handlebars'
+" Less
 Plugin 'groenewege/vim-less'
-Plugin 'beyondwords/vim-twig'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-haml'
+
+" SCSS
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'tpope/vim-liquid'
-Plugin 'rodjek/vim-puppet'
-Plugin 'fatih/vim-go'
-Plugin 'mxw/vim-jsx'
-Plugin 'mtscout6/vim-cjsx'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+call vundle#end()
+filetype plugin indent on     " Reset after initializing plugins
+syntax enable                 " Reset after initializing plugins
 
-" Non-Plugin stuff after this line
+" }}}
 
-"" Basics
-set number
-syntax on
-set encoding=utf-8
-set mouse=a
-set ttymouse=xterm
 
-"" Things like whitespace
-set nowrap
-set tabstop=2 shiftwidth=2
-set expandtab
-set backspace=indent,eol,start
-set list
-set autoindent
+" == Basic Settings == {{{
+
+set background=dark
+let g:hybrid_use_Xresources = 1  " Necessary for the hybrid colosrscheme https://github.com/w0ng/vim-hybrid
+set t_Co=256                     " Enable colored terminal
+let &t_Co=256                    " Number of term colors
+set guioptions-=T                " Removes GUI bars
+set guioptions-=l                " Removes scrollbars
+set guioptions-=r                " Removes scrollbars
+set guioptions-=b                " Removes scrollbars
+set guifont=Inconsolata\ for\ Powerline:h14
+colorscheme hybrid
+
+set number                       " Turn on line numbers.
+set expandtab                    " Tab equals spaces.
+set tabstop=2                    " Defines size of a tab in spaces.
+set softtabstop=2                " Number of spaces to delete when deleting a tab
+set shiftwidth=2                 " Spaces to use while indenting.
+set smarttab                     " <Tab> inserts correct number of spaces
+set shiftround                   " Use shiftwidth multiples when '>' or '<'
+set backspace=indent,eol,start   " Backspace over everything.
 set linespace=3
-set formatoptions=qrn1
-set formatoptions+=w
-set cursorline
+set autoindent                   " Enable automatic alignment during insertions
 
-" highlight NonText guifg=#4a4a59
-" highlight SpecialKey guifg=#4a4a59
+set nowrap                       " No wrapping of horizontal lines.
+set ruler                        " Show the cursor position all the time
+set showcmd                      " Display incomplete commands
+set showmatch                    " Display matching parenthesis
+set matchtime=2                  " Two-tenths of a second blink for matching parens
+set cmdheight=2                  " Sets the height of the cmd in lines.
+set clipboard=unnamed            " Uses the system's clipboard.
 
-"" show where line ends
-"" use gq to apply formatting
-set textwidth=80
-set colorcolumn=81
+set hlsearch                     " Highlights search matches.
+set incsearch                    " Searching as you type.
+set ignorecase                   " Ignore case while searching.
+set smartcase                    " Will switch to case sensitive if a cap is used
 
-au BufRead,BufNewFile *.md setlocal formatoptions+=ct
+if has('mouse')
+  set mouse=a                    " Enables use of mouse
+  set mousehide                  " Hide mouse when typing
+endif
 
-"" who even wants swap files???
-set noswapfile
-set nobackup
-set nowb
+set pastetoggle=<F2>             " Use F2 to insert data without indentation.
 
-"" what mode is i am?
-set showmode
+set termencoding=utf-8           " Encoding
+set encoding=utf-8
+set fileformat=unix
+set history=1000
 
-"" display things like newlines, carriage returns, whitespace, etc...
-set listchars=""
-set listchars+=tab:▸\
-" set listchars+=eol:¬
-set listchars+=trail:.
-" set listchars+=extends:>
-" set listchars+=precedes:<
-
-" ☠
-" ❤
-
-"" search settings
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-nmap <silent> ,/ :nohlsearch<CR>
-hi Search    cterm=NONE ctermfg=white ctermbg=5
-
-"" undo forever and ever
+set undolevels=1000              " Undo forever
 silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
 set undofile
 
-"" wildcard settings
 set wildignore+=*.o,*.out,*.obj,*.rbc,*.rbo,*.class,*.gem,*.pyc,*.log
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz
+set wildignore+=*.swp,*.bak,*~,._*
+set wildignore+=*/node_modules/*
+set wildignore+=*/bower_components/*
+set wildignore+=*/dist/*
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
-set wildignore+=*.swp,*~,._*
-set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*,*/img/*,*/images/*
-set wildignore+=*/env/*,*/venv/*,*/devenv/*,*/__pycache__/*,*/.divshot-cache/*
-set wildignore+=.awspublish*
-set wildignore+=.DS_Store
 
-"" set <leader> to ,
-let mapleader = ","
-set timeoutlen=500
+set list                         " Show characters for tabs, spaces, end of line
+set listchars=tab:\|\ ,eol:¬,trail:●,extends:>,precedes:<,nbsp:+
+set showbreak=↪
 
-"" enable code folding
-set foldenable
+set nobackup                     " Disable backing of files
+set noswapfile                   " Disable use of swap file.
+set nowb
+
+set wildmenu                     " Enable tab completion on commands
+set wildmode=list:longest,full   " Complete first full match.
+set vb noerrorbells t_vb=        " Be silent!
+set nostartofline                " Disables startofline option
+
+set laststatus=2                 " Always show status lines.
+
+set smartindent                  " Indent, Indent, Indent
+set cursorline                   " Highlight the current line.
+
+set autoread                     " Reload file when a file is changed from the outside
+set textwidth=80                 " Maximum line length at 80 characters. Trigged with gq
+set colorcolumn=81               " Show a line at 81 characters."
+set showmode                     " Says whether or not paste mode is turned on or off
+
+set foldenable                   " Enable code folding
 set foldmethod=syntax
 set foldlevelstart=99
 
-"" hide mouse when typing
-set mousehide
+set splitbelow                   " Open new split panes to right and bottom. More natural than default.
+set splitright
 
-"" split windows below the current window.
-set splitbelow
+set exrc                         " Allow per-project vimrc's
 
-"" session settings
-set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
+" }}}
 
-"" map escape key to jk -- much faster
-" also, <C-c> and <C-[>
-imap jk <esc>
-imap jj <esc>
-imap kk <esc>
 
-"" window navigation
+" == Mappings == {{{
+
+let mapleader = ","
+
+" Quick escaping
+inoremap jk <Esc>
+inoremap kj <Esc>
+inoremap jj <Esc>
+inoremap kk <Esc>
+cnoremap jk <Esc>
+cnoremap kj <Esc>
+cnoremap jj <Esc>
+cnoremap kk <Esc>
+
+" Quick saving
+noremap <Leader>w :w<CR>
+inoremap <Leader>w <Esc>:w<CR>
+
+" No Ex-mode
+nnoremap Q <Nop>
+
+" And by lowercase everything I mean undo
+noremap U u
+vnoremap U <Esc>u
+
+" Y for y$
+nnoremap Y y$
+
+" Q is quit, W is write
+command! W w
+command! Q q
+command! Qa qa
+
+" Visually select the text that was last edited/pasted
+nnoremap gV `[v`]
+
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" Edit Vimrc
+" $MYVIMRC points to the ~/.vimrc file
+nnoremap <Leader>ev :e $MYVIMRC<CR>
+
+" Edit UltiSnips for this file
+" You must first symlink ~/.vim/UltiSnips to the master snips folder.
+nnoremap <Leader>es :UltiSnipsEdit<CR>
+
+" Re-source vimrc
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+
+" Puts current file name in the mac paste buffer. Useful for operating on
+" the file from the command line.
+noremap <D-Y> :CopyTitle<CR><CR>
+
+"Info about the character underneath the cursor
+nnoremap gi ga
+
+
+" Movement
+" ========
+
+noremap 0 ^
+noremap <End> $
+noremap <Home> 0
+
+" Up/Down keys move by row rather than by line
+noremap k gk
+noremap j gj
+
+" Note, cmd-shift-j does line concatenation.
+noremap <S-j> 5j
+noremap <S-k> 5k
+noremap <S-l> 5l
+noremap <S-h> 5h
+noremap <C-e> 5<C-e>
+noremap <C-y> 5<C-y>
+noremap <PageUp> <c-u>
+noremap <PageDown> <c-d>
+
+" Window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Open new split panes to right and bottom. More natural than default:
-set splitbelow
-set splitright
-
-" Visually select the text that was last edited/pasted
-nmap gV `[v`]
-
-"" highlight brackets
-hi MatchParen cterm=bold ctermbg=darkmagenta ctermfg=white
-
-"" yank text to the OS X clipboard
-set clipboard=unnamed
-
-"" preserve indentation while pasting text from the OS X clipboard
-"" use ,p dummy
-noremap <Leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
-
-"" kill all trailing whitespace
-function! <SID>RemoveWhitespaces()
-  let l = line(".")
-  let c = col(".")
-  execute '%s/\s\+$//e'
-  call cursor(l, c)
-endfunction
-nnoremap <silent> <Leader><Space> :call <SID>RemoveWhitespaces()<CR>
-
-" Remove white spaces on write
-augroup AutoRemoveWhitespace
-  autocmd!
-  autocmd BufWritePre * :call <SID>RemoveWhitespaces()
-augroup END
-
-"" up/down keys move by row, rather than line
-nnoremap j gj
-nnoremap k gk
-
-"" switch buffers without saving
-set hidden
-
-"" bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-"" bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-"" Reload .vimrc after editing and saving
-augroup AutoSourceVimrc
-  autocmd!
-  autocmd bufwritepost .vimrc source $MYVIMRC
-augroup END
-
-" Leader-v to edit vimrc
-nmap <Leader>v :e $MYVIMRC<CR>
-
-" Buffer switching
+" Buffer Navigation
+" Toggle latest buffer
 nnoremap <Leader><Leader> <c-^>
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 
-" Buffer closing (without deleting split)
-nnoremap <silent> <Leader>d :bp\|bd #<CR>
+" File Management
+" ===============
 
-" Filetypes
-au BufRead,BufNewFile *.scss set filetype=scss
-autocmd BufNewFile,BufRead *Spec.{js,jsx,es6},*_spec.{js,jsx,es6},*-spec.{js,jsx,es6},*.spec.{js,jsx,es6} set filetype=jasmine.javascript.jsx
+" Close buffer but keep split open
+" Uses bufkill.vim
+noremap <C-w> :BD<CR>
+
+" Close buffer
+noremap <C-c> :bd<CR>
+
+" Rename the file. We do this via the git plugin. This only works in git
+" directories.
+nnoremap <Leader>r :call RenameFile()<cr>
+
+" Delete the buffer from disk and close the buffer
+" Uses bufkill.vim
+nnoremap <Leader>dd :call delete(expand('%'))<CR>:BD<CR>
+
+" Create (or edit) another file in the same directory as the current file
+nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 
 
-" CTAGS  -------------------------------------------------------------------
+" Searching
+" =========
 
-" Set tag file location
-set tags+=.git/tags
+"In visual mode when you press * or # to search for the current selection
+vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
+vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
+vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
+vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
 
-" Function to regenerate tag file
-function! FlushCtags()
-  silent! exe ":!ctags ."
+" Search and highlight what's under the cursor. Also automatically copies
+" the word to both yank and the mac paste buffer thanks to
+" clipboard=unnamed
+nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
+
+" Search via Ag what's under the cursor.
+nnoremap <D-F> *<S-n>ye:Ag <C-r>"<CR>
+
+" Unhighlight
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
+
+" Space bar searching via Subvert
+" Part of Tim Pope's Abolish plugin
+" http://vimcasts.org/episodes/smart-search-with-subvert/
+noremap <Space> :Subvert/
+
+" }}}
+
+
+" == Functions == {{{
+
+function! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+
+function! VisualSearch(direction) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+
+  let l:pattern = escape(@", '\\/.*$^~[]')
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+  if a:direction == 'b'
+    execute "normal ?" . l:pattern . "^M"
+  elseif a:direction == 'gv'
+    call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+  elseif a:direction == 'f'
+    execute "normal /" . l:pattern . "^M"
+  endif
+
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunction
 
-" mapping to regenerate tags file
-" silent! nnoremap <silent> TT :call FlushCtags()<CR>
+" Rename current file
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
 
-" mapping to toggle tagbar
-nnoremap <Leader>. :TagbarToggle<cr>
+" Enter any shell command and have the output appear in a new buffer
+" For example, to word count the current file:
+"
+"   :Shell wc %s
+"
+" Thanks to: http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+command! -complete=shellcmd -nargs=+ Shell call RunShellCommand(<q-args>)
+function! RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
 
-" mapping to use ctrlp tags function
-nnoremap <silent> <Leader>b :CtrlPTag<CR>
+" }}}
 
 
-"" PLUGINS -------------------------------------------------------------------
+" == Filetype Specific Settings == {{{
 
-" Airline, a powerline replacement
+" Javascript/ES6/Jsx
+" ==================
+augroup filetype_es6
+  autocmd!
+  autocmd BufRead,BufNewFile *.es6 set ft=javascript.jsx
+  autocmd BufNewFile,BufRead *Spec.{js,jsx,es6},*_spec.{js,jsx,es6},*-spec.{js,jsx,es6},*.spec.{js,jsx,es6} set filetype=jasmine.javascript.jsx
+augroup END
+
+" Coffeescript
+" ============
+augroup filetype_coffee
+  autocmd!
+  autocmd BufRead,BufNewFile *.coffee set ft=coffee
+augroup END
+
+" SCSS
+" ====
+augroup filetype_scss
+  autocmd!
+  autocmd BufRead,BufNewFile *.scss set filetype=scss
+augroup END
+
+" Python
+" ======
+augroup filetype_python
+  autocmd!
+  autocmd FileType python setlocal
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=80
+
+  let python_highlight_all = 1
+  autocmd FileType python syn keyword pythonDecorator True None False self
+augroup END
+
+" Bash
+" ====
+augroup filetype_bash
+  autocmd!
+  autocmd FileType sh set tw=0
+augroup END
+
+" Markdown
+" ========
+augroup filetype_markdown
+  autocmd!
+  " change inside heading
+  autocmd FileType markdown onoremap <buffer> ih :<c-u>execute "normal!?^==\\+$\r:nohlsearch\rkvg_"<cr>
+  " change around heading
+  autocmd FileType markdown onoremap <buffer> ah :<c-u>execute "normal! ?^==\\+\r:nohlsearch\rg_vk0"<cr>
+  autocmd BufRead,BufNewFile *.md setlocal formatoptions+=ct
+augroup END
+
+" Vimscript
+" =========
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+" }}}
+
+
+" == Autocommands == {{{
+
+augroup AutoRemoveWhitespace
+  autocmd!
+  autocmd BufWritePre * :call DeleteTrailingWS()
+augroup END
+
+" }}}
+
+
+" == Plugin Settings == {{{
+
+" Ctrlp
+" =====
+nnoremap <Leader>bs :CtrlPBuffer<CR>
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_extensions = ['tag']
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+
+" Vim Airline
+" ===========
 let g:airline_powerline_fonts = 1
-" let g:airline_section_b = '%{getcwd()}'
-" let g:airline_section_c = '%t'
 let g:airline_section_x = '%y'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#checks = ['indent']
+let g:airline#extensions#fugitive#enabled = 1
 
 
-"" Blockify
-let g:blockify_pairs = {
-      \ 'c':    [ '{', '}' ],
-      \ 'cpp':  [ '{', '}' ],
-      \ 'java': [ '{', '}' ],
-      \ 'php': [ '{', '}' ],
-      \ 'css': [ '{', '}' ],
-      \ 'scss.css': [ '{', '}' ],
-      \ 'scss': [ '{', '}' ],
-      \ 'javascript': [ '{', '}' ],
-      \ 'php.drupal': [ '{', '}' ],
-      \}
-
-
-"" Numbers
-let g:numbers_exclude = ['nerdtree']
-
-
-"" Syntastic
+" Syntastic
+" =========
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
@@ -318,107 +561,47 @@ let g:syntastic_javascript_checkers = ['eslint', 'jshint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-
-"" EasyMotion
-let g:EasyMotion_leader_key = '<Space>'
+let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
 
 
-"" Ctrlp
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_extensions = ['tag']
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" Vim Indent Guides
+" =================
+let g:indent_guides_auto_colors = 0
+augroup indent_guides
+  autocmd!
+  autocmd BufRead,BufNewFile * IndentGuidesEnable
+augroup END
 
 
-"" Tagbar
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
-
-"" Options to add support for Coffeescript
-let g:tagbar_type_coffee = {
-    \ 'ctagstype' : 'coffee',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 'm:methods',
-        \ 'f:functions',
-        \ 'v:variables',
-        \ 'f:fields',
-    \ ]
-\ }
-
-"" Options to add support for Go
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-
-"" UltiSnips
+" UltiSnips
+" =========
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
-"" Vimux
+" Vimux
+" =====
 " Run the current file with rspec
 map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
-
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
-
 " Run last command executed by VimuxRunCommand
 map <Leader>vl :VimuxRunLastCommand<CR>
-
 " Inspect runner pane
 map <Leader>vi :VimuxInspectRunner<CR>
-
 " Close vim tmux runner opened by VimuxRunCommand
 map <Leader>vq :VimuxCloseRunner<CR>
-
 " Interrupt any command running in the runner pane
 map <Leader>vx :VimuxInterruptRunner<CR>
-
 " Zoom the runner pane (use <bind-key> z to restore runner pane)
 map <Leader>vz :call VimuxZoomRunner()<CR>
 
-"" Colors and type------------------------------------------------------------
-set guifont=Inconsolata\ for\ Powerline:h14
-let g:hybrid_use_Xresources = 1
-set background=dark
-colorscheme hybrid
-if has('gui_running')
-  set go-=T
-endif
+" }}}
 
-if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-  set t_ut=
-endif
 
-" Project specific vimrc
-set exrc
-set secure
+" == Final Settings == {{{
+
+set secure  " Prevent :autocmd, shell and write commands from being run inside project-specific .vimrc files unless they’re owned by me
+
+" }}}
