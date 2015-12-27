@@ -229,7 +229,7 @@ set cursorline                   " Highlight the current line.
 
 set autoread                     " Reload file when a file is changed from the outside
 set textwidth=80                 " Maximum line length at 80 characters. Trigged with gq
-set colorcolumn=81               " Show a line at 81 characters."
+set colorcolumn=81               " Show a line at 81 characters.
 set showmode                     " Says whether or not paste mode is turned on or off
 
 set foldenable                   " Enable code folding
