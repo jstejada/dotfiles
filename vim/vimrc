@@ -44,10 +44,6 @@ Plugin 'henrik/vim-reveal-in-finder'
 " Insert closing brackets/parens
 Plugin 'jiangmiao/auto-pairs'
 
-" Fuzzy file searcher
-" TODO switch for fzf
-Plugin 'kien/ctrlp.vim'
-
 " Easily search for, substitute, & abbreviate multiple variants of a word
 " https://github.com/tpope/vim-abolish
 " http://vimcasts.org/episodes/enhanced-abbreviations-with-abolish/
@@ -301,7 +297,8 @@ nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 " Puts current file name in the mac paste buffer. Useful for operating on
 " the file from the command line.
-noremap <D-Y> :CopyTitle<CR><CR>
+execute "set <M-Y>=\eY"
+noremap <M-Y> :CopyTitle<CR><CR>
 
 "Info about the character underneath the cursor
 nnoremap gi ga
@@ -365,11 +362,14 @@ nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
 " Searching
 " =========
 
+" Hack to make M- work http://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+execute "set <M-F>=\eF"
+
 "In visual mode when you press * or # to search for the current selection
 vnoremap <silent> * :call VisualSearch('f')<CR>n<S-n>
 vnoremap <silent> # :call VisualSearch('b')<CR>n<S-n>
 vnoremap <silent> <C-f> :call VisualSearch('f')<CR>n<S-n>
-vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
+vnoremap <silent> <M-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
 
 " Search and highlight what's under the cursor. Also automatically copies
 " the word to both yank and the mac paste buffer thanks to
@@ -377,7 +377,7 @@ vnoremap <silent> <D-F> :call VisualSearch('f')<CR>n<S-n>ygn:Ag <C-r>"<CR>
 nnoremap <C-f> yiw:Subvert/<C-r>"<CR><S-n>
 
 " Search via Ag what's under the cursor.
-nnoremap <D-F> *<S-n>ye:Ag <C-r>"<CR>
+nnoremap <M-F> *<S-n>ye:Ag <C-r>"<CR>
 
 " Unhighlight
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
@@ -535,12 +535,15 @@ augroup END
 
 " == Plugin Settings == {{{
 
-" Ctrlp
-" =====
-nnoremap <Leader>bs :CtrlPBuffer<CR>
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_extensions = ['tag']
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" FZF
+" ===
+" Old buffer select:
+" nnoremap <Leader>bs :CtrlPBuffer<CR>
+" TODO Update
+"  - https://github.com/junegunn/fzf/wiki/Examples-(vim)
+"  - https://github.com/junegunn/fzf.vim
+set rtp+=/usr/local/opt/fzf
+nnoremap <silent> <C-p> :FZF -m<CR>
 
 
 " Vim Airline

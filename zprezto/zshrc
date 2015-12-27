@@ -22,22 +22,7 @@ alias zshrc="vim ~/.zshrc"
 eval "$(hub alias -s)"
 alias gst="clear;gws"
 alias gtday="g log --since=\"12am\" | ack Date: | wc -l"
-# alias ga="gia"
-function ga {
-  opt=""
-  getopts ":p" opt
-  if [[ $opt == "p" ]] ; then
-    pattern=$2
-    opts=("-p" "-A")
-  else
-    pattern=$1
-    opts=("-A")
-  fi
-  files=($(git ls-files -om --exclude-standard | xargs -I {} zsh -c '[[ "{}" =~ "\.*'$pattern'\.*" ]] && echo "{}"'))
-  if [ ${#files[@]} -ne 0  ]; then
-    git add "${opts[@]}" "${files[@]}"
-  fi
-}
+alias ga="gia"
 
 # rbenv
 eval "$(rbenv init - zsh)"
@@ -50,3 +35,36 @@ unset VIRTUAL_ENV_DISABLE_PROMPT
 # go
 export GOPATH=$HOME/codez/go
 export PATH="$GOPATH/bin:$PATH"
+
+# fzf
+# Usage Examples:
+# Select files to add to git: g add <CTRL-T>
+# Search history and paste to cli: <CTRL-R>
+# Fuzzy completion: <any command> **
+# https://github.com/junegunn/fzf/wiki/examples
+export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fe() {
+  IFS='
+'
+  local files
+  files=($(fzf-tmux --query="$1" --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  unset IFS
+}
+# Modified version where you can press
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+function fo() {
+  local out file key
+  out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
