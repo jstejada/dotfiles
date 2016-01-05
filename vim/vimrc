@@ -210,8 +210,7 @@ set wildignore+=*/dist/*
 set wildignore+=*/vendor/gems/*,*/vendor/cache/*,*/.bundle/*,*/.sass-cache/*
 
 set list                         " Show characters for tabs, spaces, end of line
-set listchars=tab:\|\ ,eol:¬,trail:●,extends:>,precedes:<,nbsp:+
-set showbreak=↪
+set listchars=tab:\|\ ,eol:¬,trail:.
 
 set nobackup                     " Disable backing of files
 set noswapfile                   " Disable use of swap file.
@@ -238,6 +237,8 @@ set foldlevelstart=99
 
 set splitbelow                   " Open new split panes to right and bottom. More natural than default.
 set splitright
+
+set timeoutlen=200               " Timeout for key mappings
 
 set exrc                         " Allow per-project vimrc's
 
@@ -274,6 +275,7 @@ nnoremap Y y$
 
 " Q is quit, W is write
 command! W w
+command! Wq wq
 command! Q q
 command! Qa qa
 
@@ -283,6 +285,9 @@ nnoremap gV `[v`]
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
+
+" Line concatenation
+nnoremap gj gJdwi <Esc>
 
 " Edit Vimrc
 " $MYVIMRC points to the ~/.vimrc file
@@ -315,7 +320,7 @@ noremap <Home> 0
 noremap k gk
 noremap j gj
 
-" Note, cmd-shift-j does line concatenation.
+" Note, cmd-shift-j does line concatenation in gvim
 noremap <S-j> 5j
 noremap <S-k> 5k
 noremap <S-l> 5l

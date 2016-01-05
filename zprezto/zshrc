@@ -14,9 +14,12 @@ fi
 export EDITOR=vim
 export VISUAL=vim
 
+# Use mvim as the rendering engine
+alias vim="mvim -v"
 alias ssh="TERM=xterm ssh"
-alias vimrc="vim ~/.vimrc"
-alias zshrc="vim ~/.zshrc"
+alias ev="vim ~/.vimrc"
+alias ez="vim ~/.zshrc"
+alias sz="source ~/.zshrc"
 
 # Git
 eval "$(hub alias -s)"
@@ -68,3 +71,8 @@ function fo() {
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
   fi
 }
+
+# N1
+alias nd="/Users/juan/codez/nylas/N1/N1.sh --dev --enable-logging"
+alias nt="/Users/juan/codez/nylas/N1/N1.sh --test --enable-logging"
+export PATH="/Users/juan/codez/nylas/arcanist/bin:$PATH"
