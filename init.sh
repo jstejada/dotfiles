@@ -23,4 +23,3 @@ rm -rf ${ZDOTDIR:-$HOME}/.vim/UltiSnips
 rm -rf ${ZDOTDIR:-$HOME}/.vim/ftdetect
 cp -rfv vim/colors ~/.vim
 cp -rfv vim/UltiSnips ~/.vim
-cp -rfv vim/ftdetect ~/.vim

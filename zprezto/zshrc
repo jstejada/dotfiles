@@ -26,6 +26,7 @@ eval "$(hub alias -s)"
 alias gst="clear;gws"
 alias gtday="g log --since=\"12am\" | ack Date: | wc -l"
 alias ga="gia"
+alias gl="g log --color --graph --branches --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # rbenv
 eval "$(rbenv init - zsh)"
@@ -73,7 +74,13 @@ function fo() {
 }
 
 # N1
-alias nd="clear;/Users/juan/codez/nylas/N1/N1.sh --dev --enable-logging"
-alias nt="clear;/Users/juan/codez/nylas/N1/N1.sh --test --enable-logging"
-alias nlint="clear;/Users/juan/codez/nylas/N1/script/grunt lint"
-export PATH="/Users/juan/codez/nylas/arcanist/bin:$PATH"
+export N1PATH=$HOME/codez/N1
+alias nd="clear;$N1PATH/N1.sh --dev --enable-logging"
+alias nt="clear;$N1PATH/N1.sh --test --enable-logging"
+alias nlint="clear;$N1PATH/script/grunt lint"
+# arc
+export ARCPATH=$HOME/codez/arcanist
+export PATH="$ARCPATH/bin:$PATH"
+arc alias clear '!git checkout master && git branch | grep arcpatch | xargs git branch -D'
+# nylas
+export PATH="${ZDOTDIR:-$HOME}/codez/password-vault/bin:$PATH"
