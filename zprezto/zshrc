@@ -73,6 +73,7 @@ function fo() {
 }
 
 # N1
-alias nd="/Users/juan/codez/nylas/N1/N1.sh --dev --enable-logging"
-alias nt="/Users/juan/codez/nylas/N1/N1.sh --test --enable-logging"
+alias nd="clear;/Users/juan/codez/nylas/N1/N1.sh --dev --enable-logging"
+alias nt="clear;/Users/juan/codez/nylas/N1/N1.sh --test --enable-logging"
+alias nlint="clear;/Users/juan/codez/nylas/N1/script/grunt lint"
 export PATH="/Users/juan/codez/nylas/arcanist/bin:$PATH"
