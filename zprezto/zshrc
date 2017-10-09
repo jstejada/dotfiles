@@ -73,14 +73,8 @@ function fo() {
   fi
 }
 
-# N1
-export N1PATH=$HOME/codez/N1
-alias nd="clear;$N1PATH/N1.sh --dev --enable-logging"
-alias nt="clear;$N1PATH/N1.sh --test --enable-logging"
-alias nlint="clear;$N1PATH/script/grunt lint"
-# arc
-export ARCPATH=$HOME/codez/arcanist
-export PATH="$ARCPATH/bin:$PATH"
-arc alias clear '!git checkout master && git branch | grep arcpatch | xargs git branch -D'
-# nylas
-export PATH="${ZDOTDIR:-$HOME}/codez/password-vault/bin:$PATH"
+export NVM_DIR="/Users/juan/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.yarn/bin:$PATH"
