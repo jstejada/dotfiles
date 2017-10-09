@@ -283,6 +283,9 @@ command! Wq wq
 command! Q q
 command! Qa qa
 
+" Copy file title
+command! CopyTitle !echo "%\c" | pbcopy
+
 " Visually select the text that was last edited/pasted
 nnoremap gV `[v`]
 
