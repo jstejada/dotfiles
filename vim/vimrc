@@ -118,6 +118,9 @@ Plugin 'sjl/vitality.vim'
 " Syntax Plugins
 " ==============
 
+" Formatting
+Plugin 'sbdchd/neoformat'
+
 " Javascript / JSX
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -475,8 +478,9 @@ endfunction
 " ==================
 augroup filetype_es6
   autocmd!
-  autocmd BufRead,BufNewFile *.es6 set ft=javascript.jsx
-  autocmd BufNewFile,BufRead *Spec.{js,jsx,es6},*_spec.{js,jsx,es6},*-spec.{js,jsx,es6},*.spec.{js,jsx,es6} set filetype=jasmine.javascript.jsx
+  autocmd BufRead,BufNewFile *.{js,jsx,es6} set ft=javascript.jsx
+  autocmd BufNewFile,BufRead *.test.{js,jsx,es6},*Spec.{js,jsx,es6},*_spec.{js,jsx,es6},*-spec.{js,jsx,es6},*.spec.{js,jsx,es6} set filetype=jasmine.javascript.jsx
+  autocmd BufWritePre *.{js,jsx,es6} Neoformat
 augroup END
 
 " Coffeescript
@@ -572,11 +576,31 @@ let g:airline#extensions#fugitive#enabled = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_jump=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:syntastic_javascript_checkers = ['eslint', 'jshint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
+
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8']
+let g:javascript_plugin_flow = 1
+
+let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint_d')
+let g:syntastic_javascript_eslint_exec = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+let g:syntastic_javascript_checkers = ['eslint']
+
+" Flow checker
+" Uncomment these lines if you want to run flow checker separately from eslint
+" let s:flow_path = system('PATH=$(npm bin):$PATH && which flow')
+" let g:syntastic_javascript_flow_exec = substitute(s:flow_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+" let g:syntastic_javascript_checkers = ['eslint', 'flow']
+"
+let g:syntastic_coffee_checkers = ['coffeelint', 'coffee']
+
+let g:syntastic_python_checkers = ['flake8']
+
+
+" NeoFormat
+" =========
+autocmd FileType javascript.jsx setlocal formatprg=./node_modules/.bin/prettier\ --stdin\ --single-quote\ --trailing-comma\ es5
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
+
 
 
 " Vim Indent Guides
