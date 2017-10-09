@@ -89,6 +89,8 @@ Plugin 'tommcdo/vim-exchange'
 " Shows indent level
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" All the colorschemes
+Plugin 'flazz/vim-colorschemes'
 
 " Snippets
 " ========
@@ -152,6 +154,7 @@ syntax enable                 " Reset after initializing plugins
 
 set background=dark
 let g:hybrid_use_Xresources = 1  " Necessary for the hybrid colosrscheme https://github.com/w0ng/vim-hybrid
+let g:base16_shell_path = '~/.vim/colors/'
 set t_Co=256                     " Enable colored terminal
 let &t_Co=256                    " Number of term colors
 set guioptions-=T                " Removes GUI bars
